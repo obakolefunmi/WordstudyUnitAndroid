@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="No Internet Connection ;("
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topicpull"
+        android:gravity="center"
+        android:textColor="#ffaf9379"
+        android:visibility="gone" />
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topicpgb"
+        android:layout_gravity="center"
+        android:tag="Please Wait..."
+        android:visibility="gone" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/topicrefresher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/topiclist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="25dp"
+            android:minWidth="25dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

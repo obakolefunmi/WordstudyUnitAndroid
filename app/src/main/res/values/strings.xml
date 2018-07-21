@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Word Study Unit</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_text_1">WORD</string>
+    <string name="tab_text_2">TOPICS</string>
+    <string name="tab_text_3">QUESTIONS</string>
+    <string name="tab_text_4">ANNOUNCEMENTS</string>
+    <string name="tab_text_5">PRAYER POINTS</string>
+    <string name="tab_text_6">PRAYER REQUEST</string>
+</resources>

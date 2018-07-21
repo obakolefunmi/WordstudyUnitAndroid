@@ -1,0 +1,132 @@
+package com.cuwordstudy.solomolaiye.wordstudyunit;
+
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.*;
+
+import com.cuwordstudy.solomolaiye.wordstudyunit.Class.Common;
+import com.cuwordstudy.solomolaiye.wordstudyunit.Class.MyResponse;
+import com.cuwordstudy.solomolaiye.wordstudyunit.Class.Notification;
+import com.cuwordstudy.solomolaiye.wordstudyunit.Class.Sender;
+import com.cuwordstudy.solomolaiye.wordstudyunit.Class.announcements;
+import com.cuwordstudy.solomolaiye.wordstudyunit.Helpers.HttpDataHandler;
+import com.cuwordstudy.solomolaiye.wordstudyunit.Remote.ApiService;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.Gson;
+import com.google.gson.JsonSerializer;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class NewAnnouncementActivity extends AppCompatActivity {
+    ProgressBar newannouncementpgb;
+    EditText newannouncementedit;
+    TextView newannouncementsend;
+    LinearLayout newannounHolder;
+    ApiService mService;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_announcement);
+        Common.currentToken = FirebaseInstanceId.getInstance().getToken();
+
+        FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
+
+        mService = Common.getFCMClient();
+
+        newannouncementpgb = findViewById(R.id.newannouncepgb);
+        newannouncementedit = findViewById(R.id.newannouncementedit);
+        newannouncementsend = findViewById(R.id.newannouncementsend);
+        newannounHolder = findViewById(R.id.newannounHolder);
+        newannouncementsend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TextUtils.isEmpty(newannouncementedit.getText().toString()))
+                {
+                    newannouncementedit.setError("Required");
+                }
+                else
+                {
+                    new SendAnnouncement(newannouncementedit.getText().toString(), NewAnnouncementActivity.this).execute(Common.getAddresApiAnoun());
+                    //send the prayer.
+                }
+            }
+        });
+        newannouncementpgb.setVisibility(View.GONE);
+    }
+    private class SendAnnouncement extends AsyncTask<String, Void, String>
+    {
+        String announcement;
+
+        NewAnnouncementActivity activity ;
+       public SendAnnouncement(String announcement, NewAnnouncementActivity activity)
+        {
+            this.announcement = announcement;
+            this.activity = activity;
+        }
+
+
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            activity.newannouncementpgb.setVisibility(View.VISIBLE);
+            activity.newannounHolder.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            activity.newannouncementpgb.setVisibility(View.GONE);
+            activity.newannounHolder.setVisibility(View.VISIBLE);
+            Notification notification = new Notification(announcement,"Word Study Announcement");
+            Sender sender =  new Sender("/topics/Meeting",notification);
+            mService.sendNotification(sender)
+                    .enqueue(new Callback<MyResponse>() {
+                        @Override
+                        public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<MyResponse> call, Throwable t) {
+                            Toast.makeText(NewAnnouncementActivity.this, "connect to the internet and respost the announcement",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            Intent intent = new Intent(activity,MainActivity.class);
+            activity.startActivity(intent);
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+           String url = strings[0];
+        HttpDataHandler http = new HttpDataHandler();
+        announcements announce = new announcements();
+            announce.announcement = announcement;
+        String json = new Gson().toJson(announce);//"{\"announcement\":\""+announcement+"\"}";
+                http.PostHttpData(url, json);
+                return "";}
+    }
+
+}

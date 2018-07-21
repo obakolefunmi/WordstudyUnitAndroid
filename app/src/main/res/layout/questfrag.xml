@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10">
+    <TextView
+        android:text="No Internet Connection ;("
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/questpull"
+        android:gravity="center"
+        android:textColor="#ffaf9379"
+        android:visibility="gone" />
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/questpgb"
+        android:layout_gravity="center"
+        android:tag="Please Wait..."
+        android:visibility="gone" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/questrefresher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10">
+        <ListView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/questlist" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <ProgressBar
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/asqquestsendpgb"
+            android:visibility="gone"
+            android:layout_gravity="center" />
+        <EditText
+            android:inputType="textMultiLine"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/askquestionedit"
+            android:layout_weight="10"
+            android:layout_margin="10dp"
+            android:hint="Do you have a question ?" />
+        <TextView
+            android:text="Ask"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/askquestionsend"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="5dp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="10"
+        android:layout_weight="15"
+        android:gravity="center">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textinputlayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:showDividers="none">
+            <EditText
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginmail"
+                android:hint="EMAIL"
+                android:layout_margin="8dp" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textinputlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:showDividers="none">
+            <EditText
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginpass"
+                android:hint="PASSWORD"
+                android:layout_margin="8dp" />
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:text="LOGIN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginbutt"
+            android:layout_margin="15dp" />
+        <TextView
+            android:text="Forgot Password ?"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgotpass"
+            android:textColor="#ff957553"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:clickable="true" />
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pgblogin"
+            android:visibility="gone" />
+    </LinearLayout>
+    <TextView
+        android:text="Want to Sign Up ?"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/signuptxtvw"
+        android:textColor="#ff957553"
+        android:gravity="center"
+        android:layout_weight="-3" />
+</LinearLayout>

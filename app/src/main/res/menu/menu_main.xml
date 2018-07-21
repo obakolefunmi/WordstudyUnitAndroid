@@ -1,0 +1,38 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity">
+
+    <item android:id="@+id/gotobible"
+        android:title="Bible"
+        />
+
+    <item android:id="@+id/meeting"
+        android:title="Meetings"
+        />
+    <item
+        android:id="@+id/menu_notepad"
+        android:title="Notepad" />
+    <item
+        android:id="@+id/menue_prayerrequest"
+        android:title="Prayer Requests" />
+    <item android:id="@+id/sendprayerrequest"
+        android:title="Send a Prayer Request"
+        />
+    <item android:id="@+id/newtopic"
+        android:title="New Topic"
+        />
+    <item android:id="@+id/newannouncement"
+        android:title="New Announcement"
+        />
+    <item android:id="@+id/newprayerpoint"
+        android:title="New Prayer Point"
+        />
+    <item android:id="@+id/changePassword"
+        android:title="Change Password"
+        />
+
+    <item android:id="@+id/signout"
+        android:title="Sign Out"
+        />
+</menu>
