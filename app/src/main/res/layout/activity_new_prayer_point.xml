@@ -80,13 +80,21 @@
                     android:minWidth="60dp" />
             </LinearLayout>
         </HorizontalScrollView>
-        <TextView
-            android:text="Send"
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/newprayerpointDone"
-            android:gravity="right"
-            android:layout_margin="12dp" />
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1
+"
+            android:id="@+id/scrollView1">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/prayer_point_container" />
+        </ScrollView>
+
     </LinearLayout>
     <ProgressBar
         android:layout_width="match_parent"

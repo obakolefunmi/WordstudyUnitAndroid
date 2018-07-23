@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -33,7 +35,6 @@ import retrofit2.Response;
 public class NewAnnouncementActivity extends AppCompatActivity {
     ProgressBar newannouncementpgb;
     EditText newannouncementedit;
-    TextView newannouncementsend;
     LinearLayout newannounHolder;
     ApiService mService;
 
@@ -42,9 +43,30 @@ public class NewAnnouncementActivity extends AppCompatActivity {
         super.onPause();
         finish();
     }
-
-
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.send_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.menu_item_send: {
+                if (TextUtils.isEmpty(newannouncementedit.getText().toString())) {
+                    newannouncementedit.setError("Required");
+                } else {
+                    new SendAnnouncement(newannouncementedit.getText().toString(), NewAnnouncementActivity.this).execute(Common.getAddresApiAnoun());
+                    //send the prayer.
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+
+                @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_announcement);
@@ -56,22 +78,8 @@ public class NewAnnouncementActivity extends AppCompatActivity {
 
         newannouncementpgb = findViewById(R.id.newannouncepgb);
         newannouncementedit = findViewById(R.id.newannouncementedit);
-        newannouncementsend = findViewById(R.id.newannouncementsend);
         newannounHolder = findViewById(R.id.newannounHolder);
-        newannouncementsend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(newannouncementedit.getText().toString()))
-                {
-                    newannouncementedit.setError("Required");
-                }
-                else
-                {
-                    new SendAnnouncement(newannouncementedit.getText().toString(), NewAnnouncementActivity.this).execute(Common.getAddresApiAnoun());
-                    //send the prayer.
-                }
-            }
-        });
+
         newannouncementpgb.setVisibility(View.GONE);
     }
     private class SendAnnouncement extends AsyncTask<String, Void, String>

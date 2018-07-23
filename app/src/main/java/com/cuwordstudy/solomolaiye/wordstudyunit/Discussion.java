@@ -48,8 +48,8 @@ public class Discussion extends AppCompatActivity implements AdapterView.OnItemL
 
     FirebaseAuth auth;
     FirebaseListAdapter<Meetingclass> adapter;
-    LinearLayout no_meetting;
-    RelativeLayout yes_metting;
+    LinearLayout no_meetting,
+     yes_metting;
     EditText message_from_user;
     ImageView send_message;
     ListView meeting_list;

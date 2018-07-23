@@ -1,5 +1,6 @@
 package com.cuwordstudy.solomolaiye.wordstudyunit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +8,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
@@ -21,10 +25,12 @@ import java.util.List;
 public class NewTopicActivity extends AppCompatActivity {
     Spinner bookSpinner, ChapterSpinner, verseSpinner;
     EditText wordtitle, verse2, message;
-    TextView newtopicDone;
     ProgressBar newtopicpgb;
     LinearLayout newtopicHolder;
     DbHelper db;
+    LinearLayout container;
+    List<Bible> biblelst = new ArrayList<Bible>();
+
     List<String> books = new ArrayList<>();
     List<String> chapter = new ArrayList<>();
     List<String> verse = new ArrayList<>();
@@ -34,7 +40,39 @@ public class NewTopicActivity extends AppCompatActivity {
     SQLiteDatabase sqliteDB = null;
     ArrayAdapter bookadapter, chapteradapter, verseadapter;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.send_menu, menu);
+       return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.menu_item_send: {
+                if (TextUtils.isEmpty(wordtitle.getText().toString().trim())) {
+                    wordtitle.setError("Required");
+                    wordtitle.requestFocus();
+                } else if (TextUtils.isEmpty(message.getText().toString().trim())) {
+                    message.setError("Required");
+                    message.requestFocus();
+                } else {
+                    if (TextUtils.isEmpty(verse2.getText().toString().trim())) {
+                        // send to mlab
+                        new SendNewTopic(wordtitle.getText().toString(), anchor, message.getText().toString(), NewTopicActivity.this).execute(Common.getAddresApitopic());
+                    } else {
+                        anchor = anchor + "-" + verse2.getText().toString();
+                        //send to mlab
+                        new SendNewTopic(wordtitle.getText().toString(), anchor, message.getText().toString(), NewTopicActivity.this).execute(Common.getAddresApitopic());
+                    }
+                }
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
 
     @Override
     protected void onPause() {
@@ -55,41 +93,11 @@ public class NewTopicActivity extends AppCompatActivity {
         wordtitle = findViewById(R.id.newtopicTitle);
         verse2 = findViewById(R.id.newtopicverseExtra);
         message = findViewById(R.id.newtopicWord);
-        newtopicDone = findViewById(R.id.newtopicDone);
         newtopicpgb = findViewById(R.id.newtopicpgb);
         newtopicHolder = findViewById(R.id.newtopicHolder);
-        newtopicDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(TextUtils.isEmpty(wordtitle.getText().toString().trim()))
-                {
-                    wordtitle.setError("Required");
-                    wordtitle.requestFocus();
-                }
-                else if (TextUtils.isEmpty(message.getText().toString().trim()))
-                {
-                    message.setError("Required");
-                    message.requestFocus();
-                }
-                else
-                {
-                    if(TextUtils.isEmpty(verse2.getText().toString().trim()))
-                    {
-                        // send to mlab
-                        new SendNewTopic(wordtitle.getText().toString(),anchor,message.getText().toString(),NewTopicActivity.this).execute(Common.getAddresApitopic());
-                    }
-                    else
-                    {
-                        anchor = anchor + "-" + verse2.getText().toString();
-                        //send to mlab
-                        new SendNewTopic(wordtitle.getText().toString(), anchor, message.getText().toString(), NewTopicActivity.this).execute(Common.getAddresApitopic());
-                    }
-                }
-                {
+        container = findViewById(R.id.topic_container);
 
-                }
-            }
-        });
+
         addBookData();
         bookSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -109,6 +117,7 @@ public class NewTopicActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 chapter_num = chapter.get(i);
                 addVersedata(chapter_num, book_num);
+                adddata(chapter_num, book_num);
             }
 
             @Override
@@ -252,5 +261,37 @@ public class NewTopicActivity extends AppCompatActivity {
 
 
     }
+    private void adddata(String chap_num , String book_num)
+    {
+        Cursor selectData = sqliteDB.rawQuery("SELECT  verse , text FROM verses WHERE chapter LIKE "+chap_num+" AND book_number LIKE "+book_num+" ORDER BY verse", new String[] { });
+        if (selectData.getCount() > 0)
+        {        biblelst.clear();
+        container.removeAllViewsInLayout();
+
+                    selectData.moveToFirst();
+            do
+            {
+                Bible vals = new Bible();
+                vals.verse = selectData.getString(selectData.getColumnIndex("verse"));
+                vals.text = selectData.getString(selectData.getColumnIndex("text"));
+                biblelst.add(vals);
+            }
+            while (selectData.moveToNext());
+            selectData.close();
+        }
+        for (Bible bible: biblelst)
+        {
+            LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View addview = layoutInflater.inflate(R.layout.bibletext, null);
+            TextView verse_num = addview.findViewById(R.id.verse);
+            TextView text = addview.findViewById(R.id.read);
+
+            verse_num.setText(bible.getVerse());
+            text.setText(bible.getText());
+            container.addView(addview);
+        }
+
+    }
+
 
 }

@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
-    p1:orientation="horizontal"
+    p1:id="@+id/linearLayout1"
     p1:layout_width="match_parent"
-    p1:layout_height="match_parent"
-    p1:id="@+id/linearLayout1">
+    p1:layout_height="wrap_content"
+    p1:orientation="horizontal">
+
     <TextView
+        p1:id="@+id/verse"
+        p1:layout_width="wrap_content"
+        p1:layout_height="match_parent"
+        p1:layout_margin="8dp"
+        p1:fontFamily="monospace"
+        p1:gravity="center"
         p1:text="1"
         p1:textAppearance="?android:attr/textAppearanceMedium"
-        p1:layout_width="wrap_content"
-        p1:layout_height="wrap_content"
-        p1:id="@+id/verse"
-        p1:textStyle="bold"
-        p1:textColor="#000000" />
+        p1:textColor="#000000"
+        p1:textSize="16sp"
+        p1:typeface="monospace" />
+
     <TextView
-        p1:text="Now faith is the substance of things hoped for evidence of things not seen"
-        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:id="@+id/read"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
-        p1:id="@+id/read"
-        p1:textStyle="italic"
-        p1:paddingBottom="10dp"
-        p1:paddingLeft="10dp"
-        p1:paddingRight="20dp"
-        p1:paddingTop="10dp"
+        p1:layout_marginBottom="10dp"
         p1:layout_marginRight="10dp"
+        p1:layout_marginTop="10dp"
+        p1:fontFamily="sans-serif-condensed"
+        p1:padding="5dp"
+        p1:text="Now faith is the substance of things hoped for evidence of things not seen"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
         p1:textColor="#000000"
-        p1:layout_marginTop="5dp" />
+        p1:textSize="18sp"
+        p1:typeface="monospace" />
 </LinearLayout>

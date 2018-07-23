@@ -1,5 +1,6 @@
 package com.cuwordstudy.solomolaiye.wordstudyunit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +8,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.cuwordstudy.solomolaiye.wordstudyunit.Class.*;
@@ -20,9 +24,11 @@ import java.util.List;
 
 public class NewPrayerPointActivity extends AppCompatActivity {
     Spinner bookSpinner, ChapterSpinner, verseSpinner;
-    TextView newprayerpointDone;
     ProgressBar newprayerpointpgb;
     LinearLayout newprayerpointHolder;
+    LinearLayout container;
+    List<Bible> biblelst = new ArrayList<Bible>();
+
     DbHelper db;
     List<String> books = new ArrayList<String>();
     List<String> chapter = new ArrayList<String>();
@@ -43,33 +49,11 @@ public class NewPrayerPointActivity extends AppCompatActivity {
         bookSpinner = findViewById(R.id.newprayerpointspinner1);
         ChapterSpinner = findViewById(R.id.newprayerpointspinner2);
         verseSpinner = findViewById(R.id.newprayerpointspinner3);
-        newprayerpointDone = findViewById(R.id.newprayerpointDone);
         newprayerpointpgb = findViewById(R.id.newprayerpointpgb);
         newprayerpointHolder = findViewById(R.id.newprayerpointHolder);
-        newprayerpointDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(point.getText().toString().trim()))
-                {
-                    point.setError("Required");
-                    point.requestFocus();
-                }
-                else
-                {
-                    if (TextUtils.isEmpty(verse2.getText().toString().trim()))
-                    {
-                        // send to mlab
-                        new SendPrayerPoint(point.getText().toString(), anchor, NewPrayerPointActivity.this).execute(Common.getAddresApiPoints());
-                    }
-                    else
-                    {
-                        anchor = anchor + "-" + verse2.getText().toString();
-                        //send to mlab
-                        new SendPrayerPoint(point.getText().toString(), anchor, NewPrayerPointActivity.this).execute(Common.getAddresApiPoints());
-                    }
-                }
-            }
-        });
+        container = findViewById(R.id.prayer_point_container);
+
+
         verse2 = findViewById(R.id.newprayerpointExtra);
         point = findViewById(R.id.newprayerpointedit);
         addBookData();
@@ -92,6 +76,7 @@ public class NewPrayerPointActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 chapter_num = chapter.get(i);
                 addVersedata(chapter_num, book_num);
+                adddata(chapter_num, book_num);
 
             }
 
@@ -191,7 +176,34 @@ public class NewPrayerPointActivity extends AppCompatActivity {
         super.onPause();
         finish();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.send_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.menu_item_send: {
+                if (TextUtils.isEmpty(point.getText().toString().trim())) {
+                    point.setError("Required");
+                    point.requestFocus();
+                } else {
+                    if (TextUtils.isEmpty(verse2.getText().toString().trim())) {
+                        // send to mlab
+                        new SendPrayerPoint(point.getText().toString(), anchor, NewPrayerPointActivity.this).execute(Common.getAddresApiPoints());
+                    } else {
+                        anchor = anchor + "-" + verse2.getText().toString();
+                        //send to mlab
+                        new SendPrayerPoint(point.getText().toString(), anchor, NewPrayerPointActivity.this).execute(Common.getAddresApiPoints());
+                    }
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item);
 
+    }
 
     private class SendPrayerPoint extends AsyncTask<String, Void, String>
     {
@@ -234,5 +246,36 @@ public class NewPrayerPointActivity extends AppCompatActivity {
             String json = new Gson().toJson(pps);
             http.PostHttpData(url, json);
             return "";        }
+    }
+    private void adddata(String chap_num , String book_num)
+    {
+        Cursor selectData = sqliteDB.rawQuery("SELECT  verse , text FROM verses WHERE chapter LIKE "+chap_num+" AND book_number LIKE "+book_num+" ORDER BY verse", new String[] { });
+        if (selectData.getCount() > 0)
+        {        biblelst.clear();
+            container.removeAllViewsInLayout();
+
+            selectData.moveToFirst();
+            do
+            {
+                Bible vals = new Bible();
+                vals.verse = selectData.getString(selectData.getColumnIndex("verse"));
+                vals.text = selectData.getString(selectData.getColumnIndex("text"));
+                biblelst.add(vals);
+            }
+            while (selectData.moveToNext());
+            selectData.close();
+        }
+        for (Bible bible: biblelst)
+        {
+            LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View addview = layoutInflater.inflate(R.layout.bibletext, null);
+            TextView verse_num = addview.findViewById(R.id.verse);
+            TextView text = addview.findViewById(R.id.read);
+
+            verse_num.setText(bible.getVerse());
+            text.setText(bible.getText());
+            container.addView(addview);
+        }
+
     }
 }

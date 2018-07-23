@@ -89,11 +89,9 @@
             android:id="@+id/textView2" />
         <android.support.design.widget.TextInputLayout
             android:minWidth="25px"
-            android:minHeight="550px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textInputLayout2"
-            android:layout_weight="10">
+            android:id="@+id/textInputLayout2">
             <EditText
                 android:inputType="textMultiLine"
                 android:layout_width="match_parent"
@@ -101,13 +99,19 @@
                 android:hint="The Word for today"
                 android:id="@+id/newtopicWord" />
         </android.support.design.widget.TextInputLayout>
-        <TextView
-            android:text="Done"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+        <ScrollView
+            android:minWidth="25px"
+            android:minHeight="25px"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/newtopicDone"
-            android:gravity="right"
-            android:layout_margin="12dp" />
+            android:layout_height="match_parent"
+            android:layout_weight="1
+"
+            android:id="@+id/scrollView1">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/topic_container" />
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>

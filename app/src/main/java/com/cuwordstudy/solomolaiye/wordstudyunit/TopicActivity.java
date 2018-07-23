@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Collections;
 import java.util.List;
 
 public class TopicActivity extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
@@ -332,7 +333,7 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
             {
                 Type listtype = new TypeToken<List<questions>>(){}.getType();
                 activity.quests = new Gson().fromJson(s, listtype);
-
+                Collections.reverse(activity.quests);
                 QuestionAdapter adapter = new QuestionAdapter(getApplicationContext(), activity.quests);
                 activity.topicacctList.setAdapter(adapter);
                 activity.topicacttpgb.setVisibility(View.GONE);
@@ -487,6 +488,7 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
                 try
             { Type listtype = new TypeToken<List<Coment>>(){}.getType();
                 activity.contris = new Gson().fromJson(s, listtype);
+                Collections.reverse(activity.contris);
                 CommentAdapter adapter = new CommentAdapter(getApplicationContext(), activity.contris);
                 activity.topicacctListcontri.setAdapter(adapter);
                 activity.pgbcliclaskcontri.setVisibility(View.GONE);
