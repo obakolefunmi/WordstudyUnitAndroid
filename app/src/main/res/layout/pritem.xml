@@ -11,6 +11,23 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/requser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="casual"
+            android:gravity="right"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+
+        <TextView
             android:id="@+id/reqttext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,22 +51,5 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="2dp"
             android:background="@color/colorPrimaryDark" />
-
-        <TextView
-            android:id="@+id/requser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="2dp"
-            android:fontFamily="casual"
-            android:gravity="right"
-            android:text="Small Text"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:typeface="monospace" />
     </LinearLayout>
 </LinearLayout>

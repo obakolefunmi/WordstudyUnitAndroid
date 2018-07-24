@@ -90,8 +90,8 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
     private TextView pointpull, announpull, topicpull, questpull, wordpull, wordword,wordbible,
      wordtitle;
     //
-    LinearLayout wordcard1 ,
-     wordcard2;
+    LinearLayout wordcard1 ;
+    CardView wordcard2;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -159,7 +159,7 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
         askquestionsend.setOnClickListener(this);
         //
         wordcard1 = wrd.findViewById(R.id.wowrdholder);
-        wordcard2 = wrd.findViewById(R.id.expander);
+        wordcard2 = wrd.findViewById(R.id.wordcard1);
 
         final ScrollView changestuff = wrd.findViewById(R.id.scrollView1);
         wordtitle = wrd.findViewById(R.id.wordTitle);
@@ -187,6 +187,23 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
 
 
                     wordrefresher.setRefreshing(false);
+                }
+            });
+
+            wordword.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ViewGroup.LayoutParams expand = wordcard2.getLayoutParams();
+                    ViewGroup.LayoutParams compress = wordcard2.getLayoutParams();
+
+                    if(expand.height == ViewGroup.LayoutParams.WRAP_CONTENT){
+                        compress.height = 300;
+                        wordcard2.setLayoutParams(compress);
+                    }
+                    else {
+                        expand.height= ViewGroup.LayoutParams.WRAP_CONTENT;
+                        wordcard2.setLayoutParams(expand);
+                    }
                 }
             });
             wordtitle.setOnClickListener(new View.OnClickListener() {

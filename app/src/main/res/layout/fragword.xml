@@ -31,82 +31,87 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/wordcard1"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:layout_margin="8dp"
-        android:minHeight="25px"
-        android:minWidth="25px"
-        android:visibility="visible">
-        <LinearLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/wordcard1"
             android:layout_width="match_parent"
-            android:id="@+id/expander"
-            android:orientation="vertical"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="230dp"
+            android:layout_margin="8dp"
+            android:minHeight="25px"
+            android:minWidth="25px"
+            android:visibility="visible"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp">
 
             <LinearLayout
-                android:id="@+id/linearLayout7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/wordTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:layout_weight="10"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:typeface="monospace" />
-
-                <TextView
-                    android:id="@+id/wordBible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </LinearLayout>
-            <ScrollView
-                android:id="@+id/scrollView1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:minHeight="25px"
-                android:minWidth="25px"><LinearLayout
+                android:id="@+id/expander"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
-
                 <LinearLayout
-                    android:id="@+id/linearLayout6"
+                    android:id="@+id/linearLayout7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:minHeight="25px"
-                    android:minWidth="25px"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/wordWord"
+                        android:id="@+id/wordTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2dp"
+                        android:layout_weight="10"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:typeface="monospace" />
+
+                    <TextView
+                        android:id="@+id/wordBible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <ScrollView
+                    android:id="@+id/scrollView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minHeight="25px"
+                    android:minWidth="25px">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:autoText="true"
+                        android:orientation="vertical">
 
-                        android:isScrollContainer="true"
-                        android:scrollbars="vertical"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:typeface="serif" />
 
-        </LinearLayout>
-        </LinearLayout>
-        </ScrollView>
-        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/linearLayout6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
-    </android.support.v7.widget.CardView>
+                            android:minHeight="25px"
+                            android:minWidth="25px"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/wordWord"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:autoText="true"
+
+                                android:fontFamily="sans-serif-condensed"
+                                android:isScrollContainer="true"
+                                android:scrollbars="vertical"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:typeface="monospace" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
     <TextView
         android:id="@+id/textView1"

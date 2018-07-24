@@ -5,9 +5,11 @@ import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 
 import com.cuwordstudy.solomolaiye.wordstudyunit.Adapters.AnsAdapter;
@@ -19,10 +21,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Collections;
 import java.util.List;
 
 public class AnswerActivity extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemClickListener , AdapterView.OnItemLongClickListener {
-    private TextView ansQuest, ansSend, anspull, ansAuthor;
+    private TextView ansQuest,  anspull, ansAuthor;
+    ImageView ansSend;
     private EditText ansEdit;
 
 
@@ -33,6 +37,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
     static String topic, question,questionid, user, questionss;
     private List<answers> anss;
     private answers anselected = null;
+    CardView questionholder;
 
     protected void onPause() {
         super.onPause();
@@ -72,6 +77,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
         ansList = findViewById(R.id.anstlist);
         anspgb = findViewById(R.id.anspgb);
         ansclickpgb = findViewById(R.id.ansclickpgb);
+        questionholder = findViewById(R.id.questionholder);
         ansList.setOnItemLongClickListener(this);
         if (savedInstanceState == null) {
             Bundle intent = getIntent().getExtras();
@@ -102,7 +108,24 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
         ansQuest.setText(question);
         questionss = "\"" + questionid + "\"";
         setTitle(topic);
+        ansQuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewGroup.LayoutParams expand = questionholder.getLayoutParams();
+                ViewGroup.LayoutParams compress = questionholder.getLayoutParams();
 
+                if(expand.height == ViewGroup.LayoutParams.WRAP_CONTENT){
+                    compress.height = 300;
+                    questionholder.setLayoutParams(compress);
+                }
+                else {
+                    expand.height= ViewGroup.LayoutParams.WRAP_CONTENT;
+                    questionholder.setLayoutParams(expand);
+                }
+                //  topicwordholder.setLayoutParams(expand);
+
+            }
+        });
 
         ansresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -173,6 +196,7 @@ public class AnswerActivity extends AppCompatActivity implements View.OnClickLis
 
                 Type listtype = new TypeToken<List<answers>>(){}.getType();
                 activity.anss = new Gson().fromJson(s, listtype);
+                    Collections.reverse(activity.anss);
                 AnsAdapter adapter = new AnsAdapter(getApplicationContext(), activity.anss);
                 activity.ansList.setAdapter(adapter);
                 activity.anspgb.setVisibility(View.GONE);

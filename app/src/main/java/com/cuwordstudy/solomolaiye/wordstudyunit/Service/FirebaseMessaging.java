@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.cuwordstudy.solomolaiye.wordstudyunit.Discussion;
 import com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity;
+import com.cuwordstudy.solomolaiye.wordstudyunit.PrayerRequest;
 import com.cuwordstudy.solomolaiye.wordstudyunit.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -24,7 +25,39 @@ public class FirebaseMessaging extends FirebaseMessagingService {
 
 
     private void showNotification(RemoteMessage.Notification notification) {
-        Intent intent = new Intent(this, Discussion.class);
+        if (notification.getTitle().equals("Word Study Prayers"))
+        {
+            Intent intent = new Intent(this, PrayerRequest.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.mipmap.ic_ws)
+                    .setContentTitle(notification.getTitle())
+                    .setContentText(notification.getBody())
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent);
+            NotificationManager notificationManager  = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.notify(0,builder.build());
+        }
+        else if(notification.getTitle().equals("Word Study Unit"))
+        {
+            Intent intent = new Intent(this, Discussion.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.mipmap.ic_ws)
+                    .setContentTitle(notification.getTitle())
+                    .setContentText(notification.getBody())
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent);
+            NotificationManager notificationManager  = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.notify(0,builder.build());
+        }
+        else
+            {
+
+
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
@@ -35,5 +68,6 @@ public class FirebaseMessaging extends FirebaseMessagingService {
                 .setContentIntent(pendingIntent);
         NotificationManager notificationManager  = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0,builder.build());
+            }
     }
 }

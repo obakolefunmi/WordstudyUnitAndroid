@@ -5,9 +5,11 @@ import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 
 import com.cuwordstudy.solomolaiye.wordstudyunit.Adapters.CommentAdapter;
@@ -38,6 +40,7 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
     private Coment contriselected = null;
     LinearLayout topiccontriholder, topicquestholder, holder,
             topiccontricard, topicquestcard;
+    CardView topicwordholder;
 
     @Override
     protected void onPause() {
@@ -75,11 +78,12 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
         topiccontriIndicator = findViewById(R.id.topiccontriIndicator);
         topicquestindicator = findViewById(R.id.topicsquestindicator);
 
-        topiccontriholder = findViewById(R.id.topiccontriholder);
-        topicquestholder =findViewById(R.id.topicquestholder);
+        topiccontriholder = findViewById(R.id.linetopiccontri);
+        topicquestholder =findViewById(R.id.linetopicquest);
 
         topiccontricard =findViewById(R.id.linetopiccontri);
         topicquestcard =findViewById(R.id.linetopicquest);
+        topicwordholder = findViewById(R.id.topicwordholder);
 
         holder = findViewById(R.id.topicaccholder);
         topicquestindicator.setOnClickListener(this);
@@ -119,7 +123,24 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
         // topicquestholder.Visibility = ViewStates.Visible;
         //topiccontriholder.Visibility = ViewStates.Visible;
         // questrefresher = quest.FindViewById<SwipeRefreshLayout>(R.id.questrefresher);
+          topicacctWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                 ViewGroup.LayoutParams expand = topicwordholder.getLayoutParams();
+                ViewGroup.LayoutParams compress = topicwordholder.getLayoutParams();
 
+                if(expand.height == ViewGroup.LayoutParams.WRAP_CONTENT){
+                    compress.height = 300;
+                    topicwordholder.setLayoutParams(compress);
+                }
+                else {
+                expand.height= ViewGroup.LayoutParams.WRAP_CONTENT;
+                    topicwordholder.setLayoutParams(expand);
+                }
+              //  topicwordholder.setLayoutParams(expand);
+
+            }
+        });
 
         topicacctrefresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -236,8 +257,11 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
-        if (view.getId() == R.id.topicacctlist) {
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+       int id = adapterView.getId();
+        switch (id){
+        case R.id.topicacctlist: {
+            questselected = quests.get(i);
             //pop up code here
             //var announsel = view.Id;
             android.widget.PopupMenu menu = new android.widget.PopupMenu(TopicActivity.this, view);
@@ -251,11 +275,12 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
             menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-                    if (menuItem.getTitle().toString() == "delete") {
-                        if (MainActivity.currname == "wordstudycu@gmail.com") {
-                            new DelQuestionData(quests.get(i), TopicActivity.this).execute(Common.getAddressSingleQuest(quests.get(i)));
+                    if(menuItem.getItemId() == R.id.delete)  {
+                        if(MainActivity.currmail.equals("wordstudycu@gmail.com") ||  MainActivity.currname.equals(questselected.user.toString())){
+                            new DelQuestionData(questselected, TopicActivity.this).execute(Common.getAddressSingleQuest(questselected));
                         } else {
-                            // Toast.MakeText(Application.Context, ":)", ToastLength.Short).Show();
+                            Toast.makeText(TopicActivity.this, "You can't delete this question", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                     return true;
@@ -266,15 +291,19 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
             menu.setOnDismissListener(new PopupMenu.OnDismissListener() {
                 @Override
                 public void onDismiss(PopupMenu popupMenu) {
-                    new GetQuesSpecifictData(TopicActivity.this).execute(Common.getAddresApiQuestspecifictitle(topicss));
+                    new GetQuesSpecifictData(TopicActivity.this).execute(Common.getAddresApiQuestspecifictitle(textss));
 
                 }
             });
             menu.show();
-        } else if (view.getId() == R.id.topicacctlistcontri) {
+            break;
+        }
+            case R.id.topicacctlistcontri: {
             //pop up code here
             //var announsel = view.Id;
-            android.widget.PopupMenu menu = new android.widget.PopupMenu(TopicActivity.this, view);
+                contriselected = contris.get(i);
+
+                android.widget.PopupMenu menu = new android.widget.PopupMenu(TopicActivity.this, view);
 
             // with Android 3 need to use MenuInfater to inflate the menu
             //  menu.MenuInflater.Inflate(Resource.Menu.popup, menu.Menu);
@@ -285,12 +314,11 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
             menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-                    if (menuItem.getTitle().toString() == "delete") {
-                        if (MainActivity.currname == "wordstudycu@gmail.com") {
-                            new DelCommment(contris.get(i), TopicActivity.this).execute(Common.getAddressSingleComment(contris.get(i)));
+                    if (menuItem.getItemId() == R.id.delete) {
+                        if (MainActivity.currmail.equals("wordstudycu@gmail.com") ||  MainActivity.currname.equals(contriselected.user.toString())) {
+                            new DelCommment(contriselected, TopicActivity.this).execute(Common.getAddressSingleComment(contriselected));
                         } else {
-                            // Toast.MakeText(Application.Context, ":)", ToastLength.Short).Show();
-                        }
+                            Toast.makeText(TopicActivity.this, "You can't delete this contribution", Toast.LENGTH_SHORT).show();                        }
                     }
                     return true;
                 }
@@ -306,8 +334,11 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
             });
 
             menu.show();
+            break;
+            }
         }
         return true;
+
     }
 
     private class GetQuesSpecifictData extends AsyncTask<String, java.lang.Void, String>
