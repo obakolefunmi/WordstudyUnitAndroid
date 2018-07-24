@@ -25,7 +25,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class TopicActivity extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
-    private TextView topicacctWord, topicacctAsk, topicacctpull, topicacctContri, topiccontriIndicator, topicquestindicator;
+    private TextView topicacctWord, topicacctpull, topiccontriIndicator,topicquestindicator;
+    private ImageView topicacctContri , topicacctAsk;
     private EditText topicacctEdit, topicacctEditcontri;
     private SwipeRefreshLayout topicacctrefresher, topicacctrefreshercontri;
     private ListView topicacctList, topicacctListcontri;

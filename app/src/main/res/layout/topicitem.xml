@@ -1,29 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="25px"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:orientation="vertical">
+
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1">
+        android:orientation="vertical">
+
         <TextView
+            android:id="@+id/topictext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="casual"
+            android:gravity="left"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+
+        <TextView
+            android:id="@+id/topicbible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/topictext"
-            android:textColor="#ffaf9379" />
-        <TextView
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:fontFamily="casual"
+            android:gravity="right"
             android:text="Small Text"
             android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+
+        <View
+            android:id="@+id/view2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/topicbible"
-            android:gravity="right"
-            android:textColor="#ffaf9379" />
+            android:layout_height="1dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/colorPrimaryDark" />
     </LinearLayout>
 </LinearLayout>

@@ -29,6 +29,7 @@
             android:id="@+id/topiclist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
             android:minHeight="25dp"
             android:minWidth="25dp" />
     </android.support.v4.widget.SwipeRefreshLayout>

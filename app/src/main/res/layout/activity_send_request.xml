@@ -17,14 +17,6 @@
             android:layout_weight="10"
             android:layout_margin="10dp"
             android:hint="Prayer point" />
-        <TextView
-            android:text="Send"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/prayerrequestsend"
-            android:layout_margin="10dp"
-            android:gravity="center" />
     </LinearLayout>
     <ProgressBar
         android:layout_width="match_parent"

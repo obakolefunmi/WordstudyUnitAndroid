@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Signup extends AppCompatActivity {
-    EditText usrname, usrmail, usrpass, userpassretype;
+    EditText usrname, usrmail, usrpass, userpassretype, firstname,lastname;
     Button signupbutt;
     TextView logintxtvw;
     ProgressBar pgb;
@@ -33,6 +33,8 @@ public class Signup extends AppCompatActivity {
     private void Signup(String mail, String password)
     {
         if (!TextUtils.isEmpty(usrname.getText().toString().trim())
+                &&!TextUtils.isEmpty( firstname.getText().toString().trim())
+                &&!TextUtils.isEmpty( lastname.getText().toString().trim())
                 &&!TextUtils.isEmpty( usrmail.getText().toString().trim())
                 && !TextUtils.isEmpty(usrpass.getText().toString().trim())
                 && usrpass.getText().toString().equals(userpassretype.getText().toString())
@@ -62,7 +64,7 @@ public class Signup extends AppCompatActivity {
                                 logintxtvw.setVisibility(View.VISIBLE);
                                 auth.getCurrentUser().sendEmailVerification();
                                 UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(usrname.getText().toString().trim())
+                                        .setDisplayName(firstname.getText().toString().trim()+" "+ lastname.getText().toString().trim())
                                         .build();
                                 auth.getCurrentUser().updateProfile(userProfileChangeRequest);
 
@@ -93,7 +95,15 @@ public class Signup extends AppCompatActivity {
             {
                 usrname.setError("Required");
             }
-            else if (TextUtils.isEmpty(usrmail.getText().toString().trim() ))
+            else if (TextUtils.isEmpty(firstname.getText().toString().trim() ))
+            {
+                firstname.setError("Required");
+
+            } else if (TextUtils.isEmpty(lastname.getText().toString().trim() ))
+            {
+                lastname.setError("Required");
+
+            } else if (TextUtils.isEmpty(usrmail.getText().toString().trim() ))
             {
                 usrmail.setError("Required");
 
@@ -119,6 +129,8 @@ public class Signup extends AppCompatActivity {
                 usrname.setError("Required");
                 usrmail.setError("Required");
                 usrpass.setError("Required");
+                firstname.setError("Required");
+                lastname.setError("Required");
                 userpassretype.setError("Required");
 
             }
@@ -145,6 +157,8 @@ public class Signup extends AppCompatActivity {
         usrname = findViewById(R.id.signupusername);
         usrmail = findViewById(R.id.signupemail);
         usrpass = findViewById(R.id.signuppass);
+        firstname =  findViewById(R.id.signupfirstname);
+        lastname =  findViewById(R.id.signuplastname);
         pgb = findViewById(R.id.pgb);
         userpassretype = findViewById(R.id.signuppassretype);
         logintxtvw = findViewById(R.id.logintxtvw);

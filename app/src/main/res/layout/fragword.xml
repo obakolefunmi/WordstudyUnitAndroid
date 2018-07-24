@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="right"
-    android:minHeight="25px"
-    android:minWidth="25px"
+    android:gravity="end"
     android:orientation="vertical">
 
     <TextView
@@ -26,142 +25,153 @@
         android:layout_marginTop="15dp"
         android:visibility="gone" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/wordrefresher"
+    <LinearLayout
+        android:id="@+id/wowrdholder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:isScrollContainer="true"
-        android:overScrollMode="always"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbarStyle="outsideInset"
-        android:scrollbars="vertical"
-        android:soundEffectsEnabled="true">
+        android:orientation="vertical">
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/wordcard1"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_margin="8dp"
+        android:minHeight="25px"
+        android:minWidth="25px"
+        android:visibility="visible">
         <LinearLayout
-            android:id="@+id/wowrdholder"
             android:layout_width="match_parent"
+            android:id="@+id/expander"
+            android:orientation="vertical"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            >
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/wordcard1"
+            <LinearLayout
+                android:id="@+id/linearLayout7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/wordTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="10"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/wordBible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:minHeight="25px"
-                android:minWidth="25px"
-                android:visibility="visible">
+                android:minWidth="25px"><LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
 
                 <LinearLayout
                     android:id="@+id/linearLayout6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:minHeight="25px"
                     android:minWidth="25px"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/linearLayout7"
+                    <TextView
+                        android:id="@+id/wordWord"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_margin="8dp"
+                        android:autoText="true"
 
-                        <TextView
-                            android:id="@+id/wordTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="2dp"
-                            android:layout_weight="10"
-                            android:text="Topic"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:typeface="monospace" />
+                        android:isScrollContainer="true"
+                        android:scrollbars="vertical"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:typeface="serif" />
 
-                        <TextView
-                            android:id="@+id/wordBible"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_margin="5dp"
-                            android:text="bible"
-                            android:textAppearance="?android:attr/textAppearanceSmall" />
-                    </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+        </ScrollView>
+        </LinearLayout>
 
-                    <ScrollView
-                        android:id="@+id/scrollView1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:minHeight="25px"
-                        android:minWidth="25px">
+    </android.support.v7.widget.CardView>
 
-                        <TextView
-                            android:id="@+id/wordWord"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:maxHeight="230dp"
-                            android:text="The Word"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:typeface="serif" />
-                    </ScrollView>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Contributions"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <ProgressBar
-                android:id="@+id/wordcontripgb"
-                style="?android:attr/progressBarStyleSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Contributions"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <ProgressBar
+        android:id="@+id/wordcontripgb"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/wordrefresher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:isScrollContainer="true">
 
             <ListView
                 android:id="@+id/wordContricontainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:layout_weight="10"
-                android:minHeight="500px"
-                android:minWidth="25px" />
+                android:divider="@android:color/transparent"
+                />
 
-            <LinearLayout
-                android:id="@+id/wordcontriEditHolder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/wordcontriedit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="10"
-                    android:inputType="textMultiLine" />
 
-                <ProgressBar
-                    android:id="@+id/wordcontrieditpgb"
-                    style="?android:attr/progressBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/wordcontrisend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    android:text="contribute" />
-            </LinearLayout>
-        </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 
+
+    <LinearLayout
+        android:id="@+id/wordcontriEditHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/wordcontriedit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="10"
+            android:inputType="textMultiLine" />
+
+        <ProgressBar
+            android:id="@+id/wordcontrieditpgb"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/wordcontrisend"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            app:srcCompat="@mipmap/ic_send" />
+    </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

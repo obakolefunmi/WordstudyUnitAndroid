@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 
@@ -49,13 +50,6 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
     public PlaceholderFragment() {
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        position = getArguments().getInt(ARG_SECTION_NUMBER);
-
-    }
-
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -74,11 +68,12 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
     private List<prayerpoints> points;
     private List<announcements> announces;
     private List<topic> topics;
+    private List<topic> wordtopics;
     private List<questions> quests;
     private List<Coment> coments;
     //
     private EditText askquestedit, wordcontriedit;
-    private TextView askquestionsend, wordcontrisend;
+    private ImageView askquestionsend, wordcontrisend;
     //
     private prayerpoints pointsselected = null;
     private announcements announselected = null;
@@ -92,9 +87,18 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
     //
     private SwipeRefreshLayout refresher, annunrefresher,  topicrefresher, questrefresher, wordrefresher;
     //
-    private TextView pointpull, announpull, topicpull, questpull, wordpull, wordword;
+    private TextView pointpull, announpull, topicpull, questpull, wordpull, wordword,wordbible,
+     wordtitle;
     //
-    LinearLayout wordcard1;
+    LinearLayout wordcard1 ,
+     wordcard2;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        position = getArguments().getInt(ARG_SECTION_NUMBER);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -155,16 +159,17 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
         askquestionsend.setOnClickListener(this);
         //
         wordcard1 = wrd.findViewById(R.id.wowrdholder);
+        wordcard2 = wrd.findViewById(R.id.expander);
 
-
-        final TextView wordtitle = wrd.findViewById(R.id.wordTitle);
+        final ScrollView changestuff = wrd.findViewById(R.id.scrollView1);
+        wordtitle = wrd.findViewById(R.id.wordTitle);
         wordword = wrd.findViewById(R.id.wordWord);
-        final TextView wordbible = wrd.findViewById(R.id.wordBible);
+        wordbible = wrd.findViewById(R.id.wordBible);
         //
 
 
         if (position == 0) {
-            new GetWordData(PlaceholderFragment.this, wordtitle, wordword, wordbible).execute(Common.getAddresApitopic());
+            new GetWordData(PlaceholderFragment.this).execute(Common.getAddresApitopic());
 
               wordrefresher = wrd.findViewById(R.id.wordrefresher);
 
@@ -172,17 +177,32 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
             wordrefresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    new GetWordData(PlaceholderFragment.this, wordtitle, wordword, wordbible).execute(Common.getAddresApitopic());
+                    String textss = "\"" + textid + "\"";
+
+                    new GetComentSpecifictData(PlaceholderFragment.this).execute(Common.getAddresApiAnsSpecificComment(textss));
+
+                    //   new GetWordData(PlaceholderFragment.this, wordtitle, wordword, wordbible).execute(Common.getAddresApitopic());
+
+
+
 
                     wordrefresher.setRefreshing(false);
                 }
             });
+            wordtitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    changetopic( wordtitle, wordword, wordbible);
+
+                }
+            }) ;
 
             return wrd;
 
         }
         else if (position == 1)
         {
+//
             topicrefresher = topic.findViewById(R.id.topicrefresher);
             new GetTopicData(PlaceholderFragment.this).execute(Common.getAddresApitopic());
 
@@ -233,7 +253,7 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
 
         }
         else{
-            new GetPointData(PlaceholderFragment.this).execute(Common.getAddresApiPoints());
+             new GetPointData(PlaceholderFragment.this).execute(Common.getAddresApiPoints());
             refresher = pp.findViewById(R.id.refresher);
 
 
@@ -282,7 +302,22 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
         }
     }
 
+private void changetopic(TextView title, TextView text, TextView bible){
+    Random rand = new Random();
 
+    int i = rand.nextInt(wordtopics.size()) + 0;
+
+    title.setText(wordtopics.get(i).title);
+    text.setText(wordtopics.get(i).text);
+    String topic = wordtopics.get(i).title;
+    String texts = wordtopics.get(i).text;
+    textid = wordtopics.get(i)._id.getOid();
+    bible.setText(wordtopics.get(i).bible);
+    String textss = "\"" + textid + "\"";
+
+    new GetComentSpecifictData(PlaceholderFragment.this).execute(Common.getAddresApiAnsSpecificComment(textss));
+
+}
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)  {
@@ -532,8 +567,7 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
         }
     }
 
-
-    //Prayer Points
+     //Prayer Points
     public class GetPointData extends AsyncTask<String, java.lang.Void, String> {
       //  private ProgressDialog progressBar = new ProgressDialog(getContext());
         private PlaceholderFragment activity;
@@ -847,13 +881,11 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
     public class GetWordData extends AsyncTask<String, java.lang.Void, String> {
 
         private PlaceholderFragment activity;
-        TextView title, text, bible;
+       // TextView title, text, bible;
 
-        public GetWordData(PlaceholderFragment activity, TextView title, TextView text, TextView bible) {
+        public GetWordData(PlaceholderFragment activity) {
             this.activity = activity;
-            this.title = title;
-            this.text = text;
-            this.bible = bible;
+
         }
         @Override
         protected void onPreExecute() {
@@ -874,17 +906,17 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
                     }.getType();
                     topics = new Gson().fromJson(s, listtype);
                     int topiccount = topics.size();
-
+                    activity.wordtopics = topics;
                     Random rand = new Random();
 
                     int i = rand.nextInt(topiccount) + 0;
 
-                    title.setText(topics.get(i).title);
-                    text.setText(topics.get(i).text);
+                    activity.wordtitle.setText(topics.get(i).title);
+                    activity.wordword.setText(topics.get(i).text);
                     String topic = topics.get(i).title;
                     String texts = topics.get(i).text;
                     textid = topics.get(i)._id.getOid();
-                    bible.setText(topics.get(i).bible);
+                    wordbible.setText(topics.get(i).bible);
                     activity.pgbword.setVisibility(View.GONE);
                     activity.wordcard1.setVisibility(View.VISIBLE);
                     String textss = "\"" + textid + "\"";
@@ -1202,6 +1234,7 @@ public class PlaceholderFragment  extends Fragment implements View.OnClickListen
 
     }
 
+//--------------------------------------------------------------------------------------------------
 
 
 

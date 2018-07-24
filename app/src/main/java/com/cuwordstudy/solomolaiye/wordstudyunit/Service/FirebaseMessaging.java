@@ -3,8 +3,10 @@ package com.cuwordstudy.solomolaiye.wordstudyunit.Service;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AppCompatActivity;
 
 import com.cuwordstudy.solomolaiye.wordstudyunit.Discussion;
 import com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity;
@@ -18,6 +20,8 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         showNotification(remoteMessage.getNotification());
     }
+
+
 
     private void showNotification(RemoteMessage.Notification notification) {
         Intent intent = new Intent(this, Discussion.class);

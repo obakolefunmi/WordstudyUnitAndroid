@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
@@ -29,7 +31,6 @@ public class SendRequestActivity extends AppCompatActivity {
     public static String curruser;
     ProgressBar sendprayedpgb;
     EditText sendprayerrequestedit;
-    TextView prayerrequestsend;
     ApiService mService;
 
 
@@ -39,9 +40,29 @@ public class SendRequestActivity extends AppCompatActivity {
         finish();
     }
 
-
-
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.send_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.menu_item_send: {
+                if (TextUtils.isEmpty(sendprayerrequestedit.getText().toString().trim())) {
+                    sendprayerrequestedit.setError("Required");
+                } else {
+                    new SendPrayerRequest(sendprayerrequestedit.getText().toString(), SendRequestActivity.this).execute(Common.getAddresApiReq());
+                    //send the prayer.
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+                @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_request);
@@ -56,21 +77,6 @@ public class SendRequestActivity extends AppCompatActivity {
 
         sendprayedpgb = findViewById(R.id.sendprayerpgb);
         sendprayerrequestedit = findViewById(R.id.sendprayerrequestedit);
-        prayerrequestsend = findViewById(R.id.prayerrequestsend);
-        prayerrequestsend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(sendprayerrequestedit.getText().toString().trim()))
-                {
-                    sendprayerrequestedit.setError("Required");
-                }
-                else
-                {
-                    new SendPrayerRequest(sendprayerrequestedit.getText().toString(), SendRequestActivity.this).execute(Common.getAddresApiReq());
-                    //send the prayer.
-                }
-            }
-        });
         sendprayedpgb.setVisibility(View.GONE);
     }
     private class SendPrayerRequest extends AsyncTask<String, Void, String>
@@ -89,7 +95,6 @@ public class SendRequestActivity extends AppCompatActivity {
             super.onPreExecute();
             activity.sendprayedpgb.setVisibility(View.VISIBLE);
             activity.sendprayerrequestedit.setVisibility(View.GONE);
-            activity.prayerrequestsend.setVisibility(View.GONE);
         }
 
         @Override
@@ -97,7 +102,6 @@ public class SendRequestActivity extends AppCompatActivity {
             super.onPostExecute(s);
             activity.sendprayedpgb.setVisibility(View.GONE);
             activity.sendprayerrequestedit.setVisibility(View.VISIBLE);
-            activity.prayerrequestsend.setVisibility(View.VISIBLE);
             Notification notification = new Notification(user+" needs our prayers","Word Study Prayers");
             Sender sender =  new Sender("/topics/Prayer",notification);
             mService.sendNotification(sender)

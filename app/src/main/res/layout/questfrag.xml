@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,12 +26,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10">
+
         <ListView
-            android:minWidth="25px"
-            android:minHeight="25px"
+            android:id="@+id/questlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/questlist" />
+            android:divider="@android:color/transparent"
+            android:minHeight="25px"
+            android:minWidth="25px" />
     </android.support.v4.widget.SwipeRefreshLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -52,15 +55,14 @@
             android:layout_weight="10"
             android:layout_margin="10dp"
             android:hint="Do you have a question ?" />
-        <TextView
-            android:text="Ask"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+
+        <ImageView
+            android:id="@+id/askquestionsend"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/askquestionsend"
-            android:layout_margin="10dp"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="5dp" />
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            app:srcCompat="@mipmap/ic_send" />
     </LinearLayout>
 </LinearLayout>

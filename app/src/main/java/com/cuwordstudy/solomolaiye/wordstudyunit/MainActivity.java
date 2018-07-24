@@ -60,10 +60,7 @@ public class MainActivity extends AppCompatActivity {
         if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
         {
             FirebaseMessaging.getInstance().subscribeToTopic("Prayer");
-        }else
-            {
-                FirebaseMessaging.getInstance().unsubscribeFromTopic("Prayer");
-            }
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -145,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.signout:
                 auth.signOut();
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("Prayer");
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("Meeting");
                 Intent intent1 = new Intent(MainActivity.this,Login_Activity.class);
                 startActivity(intent1);
                 finish();

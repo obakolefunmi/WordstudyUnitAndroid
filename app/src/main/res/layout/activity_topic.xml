@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +21,7 @@
             android:layout_width="match_parent"
             android:id="@+id/cardView1"
             android:layout_margin="8dp"
-            android:layout_height="wrap_content">
+            android:layout_height="200dp">
             <ScrollView
                 android:minWidth="25px"
                 android:minHeight="25px"
@@ -37,7 +38,6 @@
                         android:id="@+id/topicacctWord"
                         android:layout_margin="8dp"
                         android:typeface="serif"
-                        android:maxHeight="200dp"
                         android:text="The Word"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -132,17 +132,16 @@
                                 android:layout_weight="10"
                                 android:layout_margin="5dp"
                                 android:hint="Do you have a question ?" />
-                            <TextView
-                                android:text="ASK"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
+
+                            <ImageView
+                                android:id="@+id/topicacctAsk"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:id="@+id/topicacctAsk"
-                                android:gravity="center"
-                                android:layout_marginRight="10dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_marginEnd="5dp"
-                                android:layout_marginLeft="5dp" />
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="10dp"
+                                app:srcCompat="@mipmap/ic_send" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -179,63 +178,68 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/topiccontriIndicator"
                         android:layout_margin="10dp" />
+
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:minWidth="25px"
-                        android:minHeight="25px"
+                        android:id="@+id/topiccontriholder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/topiccontriholder"
+                        android:minHeight="25px"
+                        android:minWidth="25px"
+                        android:orientation="vertical"
                         android:visibility="gone">
+
                         <android.support.v4.widget.SwipeRefreshLayout
+                            android:id="@+id/topicacctrefreshercontri"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/topicacctrefreshercontri"
+                            android:layout_marginBottom="5dp"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
-                            android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
-                            android:visibility="visible"
-                            android:layout_weight="10">
+                            android:layout_weight="10"
+                            android:visibility="visible">
+
                             <ListView
-                                android:minWidth="25px"
-                                android:minHeight="25px"
+                                android:id="@+id/topicacctlistcontri"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:id="@+id/topicacctlistcontri" />
+                                android:minHeight="25px"
+                                android:minWidth="25px" />
                         </android.support.v4.widget.SwipeRefreshLayout>
+
                         <LinearLayout
-                            android:orientation="horizontal"
+                            android:id="@+id/linearLayout0"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/linearLayout0"
-                            android:weightSum="10"
                             android:layout_marginTop="-15dp"
-                            android:paddingBottom="5dp">
+                            android:orientation="horizontal"
+                            android:paddingBottom="5dp"
+                            android:weightSum="10">
+
                             <ProgressBar
+                                android:id="@+id/topicclickpgbcontri"
                                 style="?android:attr/progressBarStyleSmall"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:id="@+id/topicclickpgbcontri" />
+                                android:layout_height="match_parent" />
+
                             <EditText
-                                android:inputType="textMultiLine"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
                                 android:id="@+id/topicacctEditcontri"
-                                android:layout_weight="10"
-                                android:layout_margin="5dp"
-                                android:hint="Contributions ?" />
-                            <TextView
-                                android:text="Contribute"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:layout_weight="10"
+                                android:hint="Contributions ?"
+                                android:inputType="textMultiLine" />
+
+                            <ImageView
                                 android:id="@+id/topicacctContri"
-                                android:gravity="center"
-                                android:layout_marginRight="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginBottom="5dp"
                                 android:layout_marginEnd="5dp"
-                                android:layout_marginLeft="5dp" />
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="10dp"
+                                app:srcCompat="@mipmap/ic_send" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
