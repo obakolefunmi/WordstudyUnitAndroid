@@ -16,7 +16,7 @@ public class Common {
     private static String COMMENTS_COLLECTION_NAME = "comments";
     public static String currentToken ="";// "/topics/Meeting";
     private static  String baseURL = "https://fcm.googleapis.com/";
-    private static String API_KEY = "rHl3vntM5CRZRgRRyjKsXVtyXUlwKddr";
+    private static String API_KEY = "jXMzX0xlB-ShDNqKwyA3dRDyDszjVS4x";
 
     public  static ApiService getFCMClient(){
         return RetrofitClient.getClient(baseURL).create(ApiService.class);
