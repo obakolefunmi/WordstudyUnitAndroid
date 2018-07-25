@@ -40,7 +40,7 @@ public class DbHelper2 extends SQLiteOpenHelper {
         }
         if (tempdb != null) {
             tempdb.close();
-        }            return tempdb != null ? true : false;
+        }            return tempdb != null;
 
     }
     public void copydatabase2(){

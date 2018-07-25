@@ -604,7 +604,7 @@ public class TopicActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            activity.topicacttpgb.setVisibility(View.VISIBLE); ;
+            activity.topicacttpgb.setVisibility(View.VISIBLE);
             activity.topicacctList.setVisibility(View.GONE);
         }
 
