@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         MenuItem prpoint = menu.findItem(R.id.newprayerpoint);
         MenuItem viewPr = menu.findItem(R.id.menue_prayerrequest);
         MenuItem sendPr = menu.findItem(R.id.sendprayerrequest);
+        MenuItem view_members = menu.findItem(R.id.menu_users);
+        MenuItem update_profile = menu.findItem(R.id.menu_update_profile);
 
         if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
         {
@@ -96,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             prpoint.setVisible(true);
             viewPr.setVisible(true);
             sendPr.setVisible(false);
+            view_members.setVisible(true);
+            update_profile.setVisible(false);
         }
         else
         {
@@ -104,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
             prpoint.setVisible(false);
             viewPr.setVisible(false);
             sendPr.setVisible(true);
+            view_members.setVisible(false);
+            update_profile.setVisible(true);
 
 
         }
@@ -167,6 +173,14 @@ public class MainActivity extends AppCompatActivity {
                  Intent intent5 = new Intent(MainActivity.this,NewAnnouncementActivity.class);
                 startActivity(intent5);
                 //      StartActivity(typeof(NewAnnouncementActivity));
+                break;
+            case R.id.menu_users:
+                Intent intent9 = new Intent(MainActivity.this,MembersActivity.class);
+                startActivity(intent9);
+                break;
+            case R.id.menu_update_profile:
+                Intent intent10 = new Intent(MainActivity.this,EditProfile_Activity.class);
+                startActivity(intent10);
                 break;
             case R.id.changePassword:
                  Intent intent6 = new Intent(MainActivity.this,changepassword.class);

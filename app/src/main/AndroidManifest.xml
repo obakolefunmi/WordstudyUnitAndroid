@@ -107,18 +107,28 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
-        <activity android:name=".Notepadactivity"
+        <activity
+            android:name=".Notepadactivity"
             android:label="Notepad">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
-        <activity android:name=".EditNoteActivity"
+        <activity
+            android:name=".EditNoteActivity"
             android:label="New Note">
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.cuwordstudy.solomolaiye.wordstudyunit.Notepadactivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cuwordstudy.solomolaiye.wordstudyunit.Notepadactivity" />
         </activity>
+        <activity android:name=".MembersActivity"
+            android:label="Members">  <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" /></activity>
+        <activity android:name=".EditProfile_Activity"
+            android:label="Update Profile">  <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" /></activity>
     </application>
 
 </manifest>

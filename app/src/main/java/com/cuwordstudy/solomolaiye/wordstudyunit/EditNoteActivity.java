@@ -89,12 +89,16 @@ public class EditNoteActivity extends AppCompatActivity {
                     addnewnote(newtext.getText().toString());
                     Intent intent1 = new Intent(EditNoteActivity.this, Notepadactivity.class);
                     startActivity(intent1);
+                    finish();
+
                 }
                 else
                     {
                         updatenote(newtext.getText().toString());
                         Intent intent1 = new Intent(EditNoteActivity.this, Notepadactivity.class);
                         startActivity(intent1);
+                        finish();
+
 
                     }
                 break;
@@ -127,4 +131,6 @@ public class EditNoteActivity extends AppCompatActivity {
 
 
     }
+
+
 }

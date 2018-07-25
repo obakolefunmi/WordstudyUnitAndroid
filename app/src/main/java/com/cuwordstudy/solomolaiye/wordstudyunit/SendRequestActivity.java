@@ -102,7 +102,7 @@ public class SendRequestActivity extends AppCompatActivity {
             super.onPostExecute(s);
             activity.sendprayedpgb.setVisibility(View.GONE);
             activity.sendprayerrequestedit.setVisibility(View.VISIBLE);
-            Notification notification = new Notification(user+" needs our prayers","Word Study Prayers");
+            Notification notification = new Notification(user+" needs our prayers","Word Study Prayers","default");
             Sender sender =  new Sender("/topics/Prayer",notification);
             mService.sendNotification(sender)
                     .enqueue(new Callback<MyResponse>() {

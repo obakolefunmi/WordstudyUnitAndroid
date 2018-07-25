@@ -71,6 +71,56 @@
                     android:layout_height="match_parent">
 
                 <EditText
+                    android:id="@+id/signupphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Phone Number"
+                    android:layout_margin="8dp"
+                    android:inputType="phone" />
+                </android.support.design.widget.TextInputLayout>
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:layout_height="match_parent"
+                        android:id="@+id/signupspinnergender"
+                        android:layout_margin="5dp"
+                        android:layout_width="wrap_content" />
+                    <Spinner
+                        android:layout_height="match_parent"
+                        android:id="@+id/signupspinnerhall"
+                        android:layout_margin="5dp"
+                        android:layout_width="wrap_content" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <EditText
+                            android:id="@+id/signuproomnumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:ems="10"
+                            android:hint="room number"
+                            android:inputType="text|textCapCharacters" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                </LinearLayout>
+</HorizontalScrollView>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <EditText
                     android:inputType="textEmailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,6 +160,8 @@
                     android:layout_margin="10dp" />
             </LinearLayout>
         </ScrollView>
+
+
     </LinearLayout>
     <TextView
         android:text="I Already Have an Account"

@@ -108,7 +108,7 @@ public class NewAnnouncementActivity extends AppCompatActivity {
             super.onPostExecute(s);
             activity.newannouncementpgb.setVisibility(View.GONE);
             activity.newannounHolder.setVisibility(View.VISIBLE);
-            Notification notification = new Notification(announcement,"Word Study Announcement");
+            Notification notification = new Notification(announcement,"Word Study Announcement","default");
             Sender sender =  new Sender("/topics/Meeting",notification);
             mService.sendNotification(sender)
                     .enqueue(new Callback<MyResponse>() {

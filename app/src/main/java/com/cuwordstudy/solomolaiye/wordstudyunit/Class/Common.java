@@ -11,6 +11,7 @@ public class Common {
     private static String REQUEST_COLLECTION_NAME = "prayerrequests";
     private static String WORD_COLLECTION_NAME = "word";
     private static String QUESTION_COLLECTION_NAME = "questions";
+    private static String PROFILE_COLLECTION_NAME ="profile";
     private static String ANSWERS_COLLECTION_NAME = "answers";
     private static String COMMENTS_COLLECTION_NAME = "comments";
     public static String currentToken ="";// "/topics/Meeting";
@@ -135,6 +136,29 @@ public class Common {
     public static String getAddressSingleComment(Coment points)
     {
         String baseUrl = String.format("https://api.mlab.com/api/1/databases/wordstudy/collections/comments");
+        StringBuilder stringBuilder = new StringBuilder(baseUrl);
+        stringBuilder.append("/" + points.get_id().getOid() + "?apiKey=" + API_KEY);
+        return stringBuilder.toString();
+    }
+
+
+    public static String getAddresApiSpecificProfile(String usermail)
+    {
+        String baseUrl = String.format("https://api.mlab.com/api/1/databases/wordstudy/collections/profile");
+        StringBuilder stringBuilder = new StringBuilder(baseUrl);
+        stringBuilder.append("?q={user_email:" + usermail + "}&apiKey=" + API_KEY);
+        return stringBuilder.toString();
+    }
+    public static String getAddresApiProfile()
+    {
+        String baseUrl = String.format("https://api.mlab.com/api/1/databases/wordstudy/collections/profile");
+        StringBuilder stringBuilder = new StringBuilder(baseUrl);
+        stringBuilder.append("?apiKey=" + API_KEY);
+        return stringBuilder.toString();
+    }
+    public static String getAddressSingleProfile(Profile points)
+    {
+        String baseUrl = String.format("https://api.mlab.com/api/1/databases/wordstudy/collections/profile");
         StringBuilder stringBuilder = new StringBuilder(baseUrl);
         stringBuilder.append("/" + points.get_id().getOid() + "?apiKey=" + API_KEY);
         return stringBuilder.toString();

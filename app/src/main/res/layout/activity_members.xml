@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MembersActivity">
+    android:background="#FFFFFF"
+    android:minHeight="25px"
+    android:minWidth="25px"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/mempull"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="No Internet Connection ;("
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#ffaf9379"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/mempgb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:tag="Please Wait..."
+        android:visibility="gone" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/memrefresher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_ws_template">
+
+        <ListView
+            android:id="@+id/memlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:minHeight="25px"
+            android:minWidth="25px" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

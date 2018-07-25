@@ -81,7 +81,7 @@ public class Discussion extends AppCompatActivity implements AdapterView.OnItemL
 
         switch (id) {
             case R.id.menu_call:
-                Notification notification = new Notification("Word Study online meeting has started","Word Study Unit");
+                Notification notification = new Notification("Word Study online meeting has started","Word Study Unit","default");
                 Sender sender =  new Sender("/topics/Meeting",notification);
                 mService.sendNotification(sender)
                         .enqueue(new Callback<MyResponse>() {
