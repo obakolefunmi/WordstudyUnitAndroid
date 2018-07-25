@@ -11,7 +11,7 @@ public class Notification {
     public Notification(String body, String title,String sound) {
         this.body = body;
         this.title = title;
-        this.sound = "default" ;
+        this.sound = sound;
     }
 
     public String getSound() {

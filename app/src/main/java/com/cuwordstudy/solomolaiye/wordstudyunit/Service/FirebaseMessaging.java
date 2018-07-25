@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 
@@ -20,6 +21,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         showNotification(remoteMessage.getNotification());
+
     }
 
 
@@ -34,8 +36,12 @@ public class FirebaseMessaging extends FirebaseMessagingService {
                     .setSmallIcon(R.mipmap.ic_ws)
                     .setContentTitle(notification.getTitle())
                     .setContentText(notification.getBody())
+                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent);
+
+
+
             NotificationManager notificationManager  = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
             notificationManager.notify(0,builder.build());
         }
@@ -48,6 +54,8 @@ public class FirebaseMessaging extends FirebaseMessagingService {
                     .setSmallIcon(R.mipmap.ic_ws)
                     .setContentTitle(notification.getTitle())
                     .setContentText(notification.getBody())
+
+                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent);
             NotificationManager notificationManager  = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
@@ -64,10 +72,12 @@ public class FirebaseMessaging extends FirebaseMessagingService {
                 .setSmallIcon(R.mipmap.ic_ws)
                 .setContentTitle(notification.getTitle())
                 .setContentText(notification.getBody())
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
         NotificationManager notificationManager  = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0,builder.build());
             }
     }
+
 }

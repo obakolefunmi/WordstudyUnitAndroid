@@ -17,7 +17,11 @@
             android:layout_marginEnd="2dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
-            android:text="shalom" />
+            android:fontFamily="casual"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
 
         <TextView
             android:id="@+id/mem_lastname"
@@ -27,7 +31,11 @@
             android:layout_marginEnd="12dp"
             android:layout_marginStart="2dp"
             android:layout_marginTop="8dp"
-            android:text="olomolaiye" />
+            android:fontFamily="casual"
+            android:textColor="#000000"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
 
     </LinearLayout>
 
@@ -41,14 +49,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Daniel Hall" />
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
 
         <TextView
             android:id="@+id/mem_room"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="E101" />
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
     </LinearLayout>
 
     <TextView
@@ -56,5 +72,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="shalom.olomolaiye@stu.cu.edu.ng" />
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:typeface="monospace" />
 </LinearLayout>

@@ -1,5 +1,7 @@
 package com.cuwordstudy.solomolaiye.wordstudyunit;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
@@ -7,7 +9,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,9 +26,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cuwordstudy.solomolaiye.wordstudyunit.Class.Common;
+import com.cuwordstudy.solomolaiye.wordstudyunit.Remote.ApiService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.nio.charset.Charset;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     public static FirebaseAuth auth;
     public static String currname,currmail  ;
+    com.cuwordstudy.solomolaiye.wordstudyunit.Service.FirebaseMessaging messaging;
+    ApiService mService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +60,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         auth = FirebaseAuth.getInstance();
+
         currname = auth.getCurrentUser().getDisplayName();
 
         currmail = auth.getCurrentUser().getEmail();
+
+        mService = Common.getFCMClient();
         Common.currentToken = FirebaseInstanceId.getInstance().getToken();
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
-
         if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
         {
             FirebaseMessaging.getInstance().subscribeToTopic("Prayer");
         }
-
+        AppCenter.start(getApplication(), "b2c461db-44d4-4f0a-986c-1b815c5c9f0b",
+                Analytics.class, Crashes.class);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -77,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         }
+
+
 
 
     @Override
@@ -193,8 +207,33 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mService = Common.getFCMClient();
+        Common.currentToken = FirebaseInstanceId.getInstance().getToken();
+        FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
+        if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("Prayer");
+        }
 
-    /**
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mService = Common.getFCMClient();
+        Common.currentToken = FirebaseInstanceId.getInstance().getToken();
+        FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
+        if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
+        {
+            FirebaseMessaging.getInstance().subscribeToTopic("Prayer");
+        }
+
+    }
+
+/**
      * A placeholder fragment containing a simple view.
      */
  /*   public static class PlaceholderFragment */
