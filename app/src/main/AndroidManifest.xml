@@ -11,6 +11,7 @@
         android:icon="@mipmap/ic_ws"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:name=".App"
         android:theme="@style/AppTheme">
         <service android:name=".Service.FIrebaseIdService">
             <intent-filter>

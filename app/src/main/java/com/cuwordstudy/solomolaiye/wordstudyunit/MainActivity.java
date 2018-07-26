@@ -9,6 +9,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.cuwordstudy.solomolaiye.wordstudyunit.Service.wsService;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
@@ -64,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         currname = auth.getCurrentUser().getDisplayName();
 
         currmail = auth.getCurrentUser().getEmail();
-
         Common.currentToken = FirebaseInstanceId.getInstance().getToken();
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
         if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))

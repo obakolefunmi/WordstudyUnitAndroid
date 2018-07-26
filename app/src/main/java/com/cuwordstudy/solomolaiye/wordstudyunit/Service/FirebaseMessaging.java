@@ -1,14 +1,11 @@
 package com.cuwordstudy.solomolaiye.wordstudyunit.Service;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
+import android.app.Service;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AppCompatActivity;
-
 import com.cuwordstudy.solomolaiye.wordstudyunit.Discussion;
 import com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity;
 import com.cuwordstudy.solomolaiye.wordstudyunit.PrayerRequest;
