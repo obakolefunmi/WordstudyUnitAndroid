@@ -15,12 +15,9 @@ public class Common {
     private static String ANSWERS_COLLECTION_NAME = "answers";
     private static String COMMENTS_COLLECTION_NAME = "comments";
     public static String currentToken ="";// "/topics/Meeting";
-    private static  String baseURL = "https://fcm.googleapis.com/";
+    public static  String baseURL = "https://fcm.googleapis.com/fcm/send";
     private static String API_KEY = "jXMzX0xlB-ShDNqKwyA3dRDyDszjVS4x";
 
-    public  static ApiService getFCMClient(){
-        return RetrofitClient.getClient(baseURL).create(ApiService.class);
-    }
     public static String getAddressSinglePoints(prayerpoints points)
     {
         String baseUrl = String.format("https://api.mlab.com/api/1/databases/wordstudy/collections/prayerpoints");

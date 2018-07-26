@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
         currmail = auth.getCurrentUser().getEmail();
 
-        mService = Common.getFCMClient();
         Common.currentToken = FirebaseInstanceId.getInstance().getToken();
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
         if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
@@ -210,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mService = Common.getFCMClient();
         Common.currentToken = FirebaseInstanceId.getInstance().getToken();
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
         if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
@@ -223,7 +221,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mService = Common.getFCMClient();
         Common.currentToken = FirebaseInstanceId.getInstance().getToken();
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
         if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))

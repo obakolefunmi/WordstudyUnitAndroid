@@ -22,9 +22,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
+import static com.cuwordstudy.solomolaiye.wordstudyunit.Class.Common.baseURL;
 
 public class SendRequestActivity extends AppCompatActivity {
     FirebaseAuth auth;
@@ -72,7 +71,6 @@ public class SendRequestActivity extends AppCompatActivity {
 
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
 
-        mService = Common.getFCMClient();
 
 
         sendprayedpgb = findViewById(R.id.sendprayerpgb);
@@ -104,18 +102,7 @@ public class SendRequestActivity extends AppCompatActivity {
             activity.sendprayerrequestedit.setVisibility(View.VISIBLE);
             Notification notification = new Notification(user+" needs our prayers","Word Study Prayers","default");
             Sender sender =  new Sender("/topics/Prayer",notification);
-            mService.sendNotification(sender)
-                    .enqueue(new Callback<MyResponse>() {
-                        @Override
-                        public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<MyResponse> call, Throwable t) {
-                            Toast.makeText(SendRequestActivity.this, "connect to the internet and re-post the prayer",Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            new ApiService.sendNotification(sender).execute(baseURL);
             Intent intent = new Intent(activity,MainActivity.class);
             activity.startActivity(intent);             }
 

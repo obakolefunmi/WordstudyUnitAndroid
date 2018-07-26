@@ -39,9 +39,9 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
+
+import static com.cuwordstudy.solomolaiye.wordstudyunit.Class.Common.baseURL;
 
 
 public class Discussion extends AppCompatActivity implements AdapterView.OnItemLongClickListener {
@@ -83,19 +83,8 @@ public class Discussion extends AppCompatActivity implements AdapterView.OnItemL
             case R.id.menu_call:
                 Notification notification = new Notification("Word Study online meeting has started","Word Study Unit","default");
                 Sender sender =  new Sender("/topics/Meeting",notification);
-                mService.sendNotification(sender)
-                        .enqueue(new Callback<MyResponse>() {
-                            @Override
-                            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<MyResponse> call, Throwable t) {
-                                Toast.makeText(Discussion.this, "connect to the internet and restart the meeting",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                break;
+                new ApiService.sendNotification(sender).execute(baseURL);
+                 break;
             case R.id.menu_cancel:
                 myRef.removeValue();
                 break;
@@ -112,8 +101,6 @@ public class Discussion extends AppCompatActivity implements AdapterView.OnItemL
         Common.currentToken = FirebaseInstanceId.getInstance().getToken();
 
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
-
-        mService = Common.getFCMClient();
 
 
         message_from_user = findViewById(R.id.meeting_message);

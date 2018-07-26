@@ -27,9 +27,6 @@ import com.cuwordstudy.solomolaiye.wordstudyunit.Helpers.DbHelper2;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Notepadactivity extends AppCompatActivity implements AdapterView.OnItemClickListener , AdapterView.OnItemLongClickListener{
     LinearLayout note_holder,no_note;

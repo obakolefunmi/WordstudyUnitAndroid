@@ -28,9 +28,9 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.JsonSerializer;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
+
+import static com.cuwordstudy.solomolaiye.wordstudyunit.Class.Common.baseURL;
 
 public class NewAnnouncementActivity extends AppCompatActivity {
     ProgressBar newannouncementpgb;
@@ -74,7 +74,6 @@ public class NewAnnouncementActivity extends AppCompatActivity {
 
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
 
-        mService = Common.getFCMClient();
 
         newannouncementpgb = findViewById(R.id.newannouncepgb);
         newannouncementedit = findViewById(R.id.newannouncementedit);
@@ -110,18 +109,8 @@ public class NewAnnouncementActivity extends AppCompatActivity {
             activity.newannounHolder.setVisibility(View.VISIBLE);
             Notification notification = new Notification(announcement,"Word Study Announcement","default");
             Sender sender =  new Sender("/topics/Meeting",notification);
-            mService.sendNotification(sender)
-                    .enqueue(new Callback<MyResponse>() {
-                        @Override
-                        public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+            new ApiService.sendNotification(sender).execute(baseURL);
 
-                        }
-
-                        @Override
-                        public void onFailure(Call<MyResponse> call, Throwable t) {
-                            Toast.makeText(NewAnnouncementActivity.this, "connect to the internet and respost the announcement",Toast.LENGTH_SHORT).show();
-                        }
-                    });
             Intent intent = new Intent(activity,MainActivity.class);
             activity.startActivity(intent);
         }
