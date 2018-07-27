@@ -824,10 +824,6 @@ private void changetopic(TextView title, TextView text, TextView bible){
                 Type listtype = new TypeToken<List<topic>>(){}.getType();
                 activity.topics = new Gson().fromJson(s, listtype);
                 Collections.reverse(activity.topics);
-                int i = new Random().nextInt(activity.topiccount + 1)+1;
-                activity.topictitle = activity.topics.get(i).title;
-                activity.topicword = activity.topics.get(i).text;
-                activity.topicbible = activity.topics.get(i).bible;
 
                 TopicAdapter adapter = new TopicAdapter(getContext(), activity.topics);
                 activity.topiclst.setAdapter(adapter);

@@ -12,6 +12,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
+import static com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity.curruser;
+
 public class changepassword extends AppCompatActivity {
     EditText editpass;
     Button Changebutton;
@@ -49,7 +51,7 @@ public class changepassword extends AppCompatActivity {
                     Changepgb.setVisibility(View.VISIBLE);
                     String newpassword = editpass.getText().toString();
 
-                    auth.getCurrentUser().updatePassword(newpassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    curruser.updatePassword(newpassword).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             editpass.setVisibility(View.VISIBLE);

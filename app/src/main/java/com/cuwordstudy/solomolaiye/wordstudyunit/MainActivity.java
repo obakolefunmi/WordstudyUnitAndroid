@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.cuwordstudy.solomolaiye.wordstudyunit.Service.wsService;
+import com.google.firebase.auth.FirebaseUser;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     public static FirebaseAuth auth;
     public static String currname,currmail  ;
+    public static FirebaseUser curruser;
     com.cuwordstudy.solomolaiye.wordstudyunit.Service.FirebaseMessaging messaging;
     ApiService mService;
 
@@ -62,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         auth = FirebaseAuth.getInstance();
+        curruser = auth.getCurrentUser();
 
-        currname = auth.getCurrentUser().getDisplayName();
-
-        currmail = auth.getCurrentUser().getEmail();
+        currname = curruser.getDisplayName();
+        currmail = curruser.getEmail();
         Common.currentToken = FirebaseInstanceId.getInstance().getToken();
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
-        if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
+        if (curruser.getEmail().equals("wordstudycu@gmail.com"))
         {
             FirebaseMessaging.getInstance().subscribeToTopic("Prayer");
         }
@@ -105,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         MenuItem view_members = menu.findItem(R.id.menu_users);
         MenuItem update_profile = menu.findItem(R.id.menu_update_profile);
 
-        if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
+        if (curruser.getEmail().equals("wordstudycu@gmail.com"))
         {
             topic.setVisible(true);
             announce.setVisible(true);
@@ -212,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         Common.currentToken = FirebaseInstanceId.getInstance().getToken();
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
-        if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
+        if (curruser.getEmail().equals("wordstudycu@gmail.com"))
         {
             FirebaseMessaging.getInstance().subscribeToTopic("Prayer");
         }
@@ -224,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Common.currentToken = FirebaseInstanceId.getInstance().getToken();
         FirebaseMessaging.getInstance().subscribeToTopic("Meeting");
-        if (auth.getCurrentUser().getEmail().equals("wordstudycu@gmail.com"))
+        if (curruser.getEmail().equals("wordstudycu@gmail.com"))
         {
             FirebaseMessaging.getInstance().subscribeToTopic("Prayer");
         }
