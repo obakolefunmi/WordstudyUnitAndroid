@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,21 +28,51 @@ public class Search extends AppCompatActivity {
     List<search> searchlst = new ArrayList<>();
     ListView searchlstvw;
     String searchtext, book_num, book_chap;
-    EditText searchedit;
-    TextView searchbtn;
+  //  EditText searchedit;
+ //   ImageView searchbtn;
     ProgressBar searchpgb;
     search searchselected = null;
+    SearchView biblesearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        Intent intent = new Intent();
-        searchtext = intent.getStringExtra("searchtxt");
-        searchedit = findViewById(R.id.searchedit);
-        searchbtn = findViewById(R.id.searchbtn);
+        if (savedInstanceState == null) {
+            Bundle intent = getIntent().getExtras();
+            if (intent == null) {
+                searchtext = null;
+            } else {
+                searchtext = intent.getString("searchtxt");
+            }
+        }else {
+            searchtext = (String) savedInstanceState.getSerializable("searchtxt");
+        }
+        biblesearch = findViewById(R.id.bible_search_search);
+
+        biblesearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Toast.makeText(Search.this, s, Toast.LENGTH_SHORT).show();
+
+                searchpgb.setVisibility(View.VISIBLE);
+                searchlst.clear();
+                adddata(s);
+                biblesearch.setQueryHint(s);
+                searchpgb.setVisibility(View.GONE);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+
+      //  searchedit = findViewById(R.id.searchedit);
+        //searchbtn = findViewById(R.id.searchbtn);
         searchpgb = findViewById(R.id.searchpgb);
         searchlstvw = findViewById(R.id.searchList);
-        searchedit.setText(searchtext);
+        biblesearch.setQueryHint(searchtext);
         db = new DbHelper(getApplicationContext());
         db.createdatabase();
         sqliteDB = db.getWritableDatabase();
@@ -67,22 +99,10 @@ public class Search extends AppCompatActivity {
 
             }
         });
-        searchbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               Toast.makeText(Search.this, searchedit.getText().toString(), Toast.LENGTH_SHORT).show();
-
-                searchpgb.setVisibility(View.VISIBLE);
-                searchlst.clear();
-                adddata(searchedit.getText().toString()+" ");
-                searchpgb.setVisibility(View.GONE);
-
-            }
-        });
-    }
+     }
     private void adddata(String info)
     {
-        Cursor selectData = sqliteDB.rawQuery("SELECT book_number,chapter, verse , text FROM verses WHERE text LIKE\"%" + info + "%\"" + "ORDER BY book_number, chapter,verse", new String[] { });
+        Cursor selectData = sqliteDB.rawQuery("SELECT book_number,chapter, verse , text FROM verses WHERE text LIKE\"% " + info + " %\"" + "ORDER BY book_number, chapter,verse", new String[] { });
         if (selectData.getCount() > 0)
         {
             selectData.moveToFirst();
