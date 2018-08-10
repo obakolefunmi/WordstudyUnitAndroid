@@ -8,8 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_ws"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".App"
 
@@ -27,7 +28,8 @@
 
         <activity
             android:name=".Login_Activity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,16 +39,20 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".BooksActivity"
-            android:label="Word Study Bible">
+            android:label="Word Study Bible"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
-        <activity android:name=".Signup"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Signup"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
 
         <activity android:name=".ChapterActivity"
             android:screenOrientation="portrait">
@@ -62,32 +68,38 @@
         </activity>
         <activity android:name=".BibleActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".SendRequestActivity">
+        <activity android:name=".SendRequestActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
-        <activity android:name=".NewTopicActivity">
+        <activity android:name=".NewTopicActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
-        <activity android:name=".NewPrayerPointActivity">
+        <activity android:name=".NewPrayerPointActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
-        <activity android:name=".NewAnnouncementActivity">
+        <activity android:name=".NewAnnouncementActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
-        <activity android:name=".changepassword">
+        <activity android:name=".changepassword"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
-        <activity android:name=".Forgotpassword">
+        <activity android:name=".Forgotpassword"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.Login_Activity" />
@@ -106,38 +118,46 @@
         </activity>
         <activity
             android:name=".Discussion"
-            android:label="Meetings">
+            android:label="Meetings"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
         <activity
             android:name=".PrayerRequest"
-            android:label="Prayer Requests">
+            android:label="Prayer Requests"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
         <activity
             android:name=".Notepadactivity"
-            android:label="Notepad">
+            android:label="Notepad"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
         <activity
             android:name=".EditNoteActivity"
-            android:label="New Note">
+            android:label="New Note"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.Notepadactivity" />
         </activity>
         <activity android:name=".MembersActivity"
-            android:label="Members">  <meta-data
+            android:label="Members"
+            android:screenOrientation="portrait">
+            <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" /></activity>
         <activity android:name=".EditProfile_Activity"
-            android:label="Update Profile">  <meta-data
+            android:label="Update Profile"
+            android:screenOrientation="portrait">
+            <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" /></activity>
     </application>
