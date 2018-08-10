@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.Toast;
 
 import com.cuwordstudy.solomolaiye.wordstudyunit.Helpers.DbHelper2;
 
@@ -87,20 +88,32 @@ public class EditNoteActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(status))
                 {
                     addnewnote(newtext.getText().toString());
-                    Intent intent1 = new Intent(EditNoteActivity.this, Notepadactivity.class);
-                    startActivity(intent1);
-                    finish();
 
                 }
                 else
                     {
                         updatenote(newtext.getText().toString());
-                        Intent intent1 = new Intent(EditNoteActivity.this, Notepadactivity.class);
-                        startActivity(intent1);
-                        finish();
 
 
                     }
+                Toast.makeText(EditNoteActivity.this,"Saved",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.menue_goto_bible:
+                //goto the bible
+                if(!TextUtils.isEmpty(status))
+                {
+                    addnewnote(newtext.getText().toString());
+                    Intent intent0 = new Intent(EditNoteActivity.this, BooksActivity.class);
+                    startActivity(intent0);
+                }
+                else
+                {
+                    updatenote(newtext.getText().toString());
+                    Intent intent0 = new Intent(EditNoteActivity.this, BooksActivity.class);
+                    startActivity(intent0);
+
+                }
+                Toast.makeText(EditNoteActivity.this,"Saved",Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);

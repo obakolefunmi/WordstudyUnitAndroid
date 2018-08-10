@@ -128,21 +128,21 @@ public class Discussion extends AppCompatActivity implements AdapterView.OnItemL
     }
     private void displayChat() {
 
-        adapter = new FirebaseListAdapter<Meetingclass>(this, Meetingclass.class, R.layout.message_item,myRef )
-        {  
-            TextView message_text,message_user,message_time;
-            RelativeLayout message_shifter;
+                    adapter = new FirebaseListAdapter<Meetingclass>(this, Meetingclass.class, R.layout.message_item,myRef )
+                    {
+                        TextView message_text,message_user,message_time;
+                        RelativeLayout message_shifter;
 
-            @Override
-            protected void populateView(View v, Meetingclass model, int position) {
-                List<Meetingclass> newmessage = new ArrayList<>();
+                        @Override
+                        protected void populateView(View v, Meetingclass model, int position) {
+                            List<Meetingclass> newmessage = new ArrayList<>();
 
-                message_text = v.findViewById(R.id.message_item_text);
-                message_user = v.findViewById(R.id. message_user);
-                message_time = v.findViewById(R.id.message_time);
-                message_shifter = v.findViewById(R.id.message_shifter);
-                message_text.setText(model.getMessageText().toString());
-                message_user.setText(model.getMessageUser().toString());
+                            message_text = v.findViewById(R.id.message_item_text);
+                            message_user = v.findViewById(R.id. message_user);
+                            message_time = v.findViewById(R.id.message_time);
+                            message_shifter = v.findViewById(R.id.message_shifter);
+                            message_text.setText(model.getMessageText().toString());
+                            message_user.setText(model.getMessageUser().toString());
                 message_time.setText(DateFormat.format("hh:mm",model.getMessageTime()));
                 newmessage.add(model);
             

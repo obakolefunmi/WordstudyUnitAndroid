@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/menue_goto_bible"
+        android:icon="@drawable/ic_bible"
+        android:title="Bible"
+        app:showAsAction="always" />
     <item
         android:id="@+id/menu_discard"
         android:icon="@mipmap/ic_clear"
@@ -12,4 +16,5 @@
         android:icon="@mipmap/ic_save"
         android:title="Save"
         app:showAsAction="always" />
+
 </menu>

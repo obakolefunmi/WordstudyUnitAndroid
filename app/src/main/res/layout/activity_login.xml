@@ -5,29 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="10">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:fontFamily="casual"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="monospace" />
+
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/linearLayout1"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:weightSum="10"
-        android:layout_weight="15"
-        android:gravity="center">
+        android:layout_marginTop="6dp"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="10">
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textinputlayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:showDividers="none">
+
             <EditText
-                android:inputType="textEmailAddress"
+                android:id="@+id/loginmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/loginmail"
+                android:layout_margin="8dp"
                 android:hint="EMAIL"
-                android:layout_margin="8dp" />
+                android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textinputlayout1"
             android:layout_width="match_parent"
@@ -35,43 +54,49 @@
             android:showDividers="none"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/colorPrimaryDark">
+
             <EditText
-                android:inputType="textPassword"
+                android:id="@+id/loginpass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/loginpass"
+                android:layout_margin="8dp"
                 android:hint="PASSWORD"
-                android:layout_margin="8dp" />
+                android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
+
         <Button
-            android:text="LOGIN"
+            android:id="@+id/loginbutt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/loginbutt"
-            android:layout_margin="15dp" />
+            android:layout_margin="15dp"
+            android:text="LOGIN" />
+
         <TextView
+            android:id="@+id/forgotpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:gravity="center"
             android:text="Forgot Password ?"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/forgotpass"
-            android:textColor="#ff957553"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:clickable="true" />
+            android:textColor="#ff957553" />
+
         <ProgressBar
+            android:id="@+id/pgblogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pgblogin"
             android:visibility="gone" />
     </LinearLayout>
+
     <TextView
-        android:text="Want to Sign Up ?"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/signuptxtvw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/signuptxtvw"
-        android:textColor="#ff957553"
+        android:layout_margin="5dp"
+        android:layout_weight="-1"
         android:gravity="center"
-        android:layout_weight="-3" />
+        android:text="Want to Sign Up ?"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#ff957553" />
 </LinearLayout>

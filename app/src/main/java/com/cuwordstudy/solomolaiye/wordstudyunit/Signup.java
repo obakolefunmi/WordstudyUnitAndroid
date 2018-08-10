@@ -178,11 +178,7 @@ public class Signup extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

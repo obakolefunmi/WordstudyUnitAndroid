@@ -155,11 +155,7 @@ public class Login_Activity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
+
 
     @Override
     protected void onStart() {

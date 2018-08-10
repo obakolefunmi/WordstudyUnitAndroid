@@ -45,7 +45,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cuwordstudy.solomolaiye.wordstudyunit.MainActivity" />
         </activity>
-        <activity android:name=".Signup" />
+        <activity android:name=".Signup"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity android:name=".ChapterActivity"
             android:screenOrientation="portrait">
             <meta-data
