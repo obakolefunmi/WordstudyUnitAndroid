@@ -61,7 +61,7 @@ public class Signup extends AppCompatActivity {
             userpassretype.setVisibility(View.GONE);
             logintxtvw.setVisibility(View.GONE);
             auth.createUserWithEmailAndPassword(mail, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    .addOnCompleteListener(Signup.this,new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful())
@@ -101,7 +101,7 @@ public class Signup extends AppCompatActivity {
                                 userpassretype.setVisibility(View.VISIBLE);
                                 logintxtvw.setVisibility(View.VISIBLE);
 
-                                Toast.makeText(Signup.this, "Sign Up Not Succesfull", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Signup.this, "Sign Up Not Successful", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

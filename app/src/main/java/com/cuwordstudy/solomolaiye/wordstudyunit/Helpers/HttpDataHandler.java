@@ -15,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
 
@@ -55,14 +56,14 @@ public class HttpDataHandler {
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoOutput(true);
 
-            byte[] _out = json.getBytes(StandardCharsets.UTF_8);
+            byte[] _out = json.getBytes();
             int length = _out.length;
             urlConnection.setFixedLengthStreamingMode(length);
             urlConnection.setRequestProperty("Content-Type", "application/json; charset-UTF-8");
            // urlConnection.setRequestProperty("charset", "utf-8");
             urlConnection.connect();
-            try( OutputStream str= urlConnection.getOutputStream())
-            {
+            try{
+                OutputStream str= urlConnection.getOutputStream();
 
                 str.write(_out, 0, length);
             }catch(Exception ex) { }
@@ -80,14 +81,14 @@ public class HttpDataHandler {
             urlConnection.setDoOutput(true);
 
 
-            byte[] _out = newValue.getBytes(StandardCharsets.UTF_8);
+            byte[] _out = newValue.getBytes();
             int length = _out.length;
             urlConnection.setFixedLengthStreamingMode(length);
             urlConnection.setRequestProperty("Content-Type", "application/json; charset-UTF-8");
             // urlConnection.setRequestProperty("charset", "utf-8");
             urlConnection.connect();
-            try( OutputStream str= urlConnection.getOutputStream())
-            {
+            try{OutputStream str= urlConnection.getOutputStream();
+
 
                 str.write(_out, 0, length);
             }catch(Exception ex) { }
@@ -105,24 +106,20 @@ public class HttpDataHandler {
             urlConnection.setRequestMethod("DELETE");
             urlConnection.setDoOutput(true);
 
-            byte[] _out = json.getBytes(StandardCharsets.UTF_8);
+            byte[] _out = json.getBytes();
             int length = _out.length;
             urlConnection.setFixedLengthStreamingMode(length);
             urlConnection.setRequestProperty("Content-Type", "application/json; charset-UTF-8");
             // urlConnection.setRequestProperty("charset", "utf-8");
             urlConnection.connect();
-            try( OutputStream str= urlConnection.getOutputStream())
-            {
+            try{ OutputStream str= urlConnection.getOutputStream();
+
 
                 str.write(_out);
-            } InputStream response = urlConnection.getInputStream();
-        }catch(MalformedURLException ex) {
-            ex.printStackTrace();
-        }catch(ProtocolException ex) {
-            ex.printStackTrace();
-        }catch(IOException ex) {
-            ex.printStackTrace();
-        }
+            }catch(Exception ex) { }
+            InputStream response = urlConnection.getInputStream();
+
+        }catch(Exception ex) { }
     }
 
 

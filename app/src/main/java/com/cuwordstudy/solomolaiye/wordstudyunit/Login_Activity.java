@@ -100,7 +100,7 @@ public class Login_Activity extends AppCompatActivity {
             passlay.setVisibility(View.GONE);
             signup.setVisibility(View.GONE);
             auth.signInWithEmailAndPassword(mail, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    .addOnCompleteListener(Login_Activity.this,new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful())
