@@ -12,10 +12,14 @@
         android:id="@+id/new_note"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="12dp"
         android:background="@mipmap/bg_ws_template"
         android:fontFamily="casual"
         android:gravity="top"
         android:hint="Notes"
+        android:isScrollContainer="true"
         android:lineSpacingExtra="8sp"
+        android:scrollbars="vertical"
         android:typeface="monospace" />
+
 </LinearLayout>

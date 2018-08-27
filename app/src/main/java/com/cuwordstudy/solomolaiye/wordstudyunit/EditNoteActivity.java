@@ -88,6 +88,9 @@ public class EditNoteActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(status))
                 {
                     addnewnote(newtext.getText().toString());
+                    Intent intent1 = new Intent(EditNoteActivity.this, Notepadactivity.class);
+                    startActivity(intent1);
+                    finish();
 
                 }
                 else
